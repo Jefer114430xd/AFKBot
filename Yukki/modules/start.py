@@ -28,11 +28,11 @@ async def on_start(_, message: Message):
         [
             [
                 InlineKeyboardButton(
-                    text="📜 Help Section",
+                    text="📜 Ayuda",
                     url=f"https://t.me/{botusername}?start=help",
                 ),
                 InlineKeyboardButton(
-                    text="🔧 Settings",
+                    text="🔧 Ajustes",
                     callback_data="settings_callback",
                 ),
             ]
@@ -49,7 +49,7 @@ async def on_help(_, message: Message):
         [
             [
                 InlineKeyboardButton(
-                    text="📜 Help Section",
+                    text="📜 Ayuda",
                     url=f"https://t.me/{botusername}?start=help",
                 ),
             ]
@@ -71,7 +71,7 @@ async def on_private_start(_, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        text="➕ Add me to a Group",
+                        text="➕ Añademe A tu grupo",
                         url=f"https://t.me/{botusername}?startgroup=true",
                     ),
                 ]
@@ -91,14 +91,14 @@ async def on_close_button(client, CallbackQuery):
 
 @app.on_callback_query(filters.regex("cleanmode_answer"))
 async def on_cleanmode_button(client, CallbackQuery):
-    await CallbackQuery.answer("⁉️ What is This?\n\nWhen activated, Bot will delete its message after 5 Mins to make your chat clean and clear.", show_alert=True)
+    await CallbackQuery.answer("⁉️ Que es esto?\n\nCuando este activado eliminará el último mensaje en 5 minutos.", show_alert=True)
 
 @app.on_callback_query(filters.regex("settings_callback"))
 async def on_settings_button(client, CallbackQuery):
     await CallbackQuery.answer()
     status = await is_cleanmode_on(CallbackQuery.message.chat.id)
     buttons = settings_markup(status)
-    return await CallbackQuery.edit_message_text(f"⚙️ **AFK Bot Settings**\n\n🖇**Group:** {CallbackQuery.message.chat.title}\n🔖**Group ID:** `{CallbackQuery.message.chat.id}`\n\n💡**Choose the function buttons from below which you want to edit or change.**", reply_markup=InlineKeyboardMarkup(buttons),)
+    return await CallbackQuery.edit_message_text(f"⚙️ **Ajustes Bot AFK**\n\n🖇**Grupo:** {CallbackQuery.message.chat.title}\n🔖**Group ID:** `{CallbackQuery.message.chat.id}`\n\n💡**Elige la Funcion que necesites Configurar**", reply_markup=InlineKeyboardMarkup(buttons),)
 
 @app.on_callback_query(filters.regex("CLEANMODE"))
 async def on_cleanmode_change(client, CallbackQuery):
